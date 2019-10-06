@@ -1,9 +1,9 @@
 # Helper Method
 def position_taken?(board, index)
-  !(board[index].nil? || board[index] == " ")
+  !(board[index].nil? || board[index] == " " || board[index] == "")
 end
 
- WIN_COMBINATIONS = [
+WIN_COMBINATIONS = [
    [0,1,2],
    [3,4,5],
    [6,7,8],
@@ -13,52 +13,41 @@ end
    [0,4,8],
    [2,4,6]
 ]
+
+
 def won?(board)
- WIN_COMBINATIONS.detect do |win_combination|
-   win_index_1 = win_combination[0]
-   win_index_2 = win_combination[1]
-   win_index_3 = win_combination[2]
-   position_1 = board[win_index_1] # value of board at win_index_1
-   position_2 = board[win_index_2] # value of board at win_index_2
-   position_3 = board[win_index_3] # value of board at win_index_3
-   if position_1 == "X" && position_2 == "X" && position_3 == "X"
-        return win_combination
-      elsif position_1 == "O" && position_2 == "O" && position_3 == "O"
-        return win_combination
-      else
-        false
-      end
+  WIN_COMBINATIONS.detect do |combinations|
+    position_1 = combinations[0]
+    position_2 = combinations[1]
+    position_3 = combinations[2]
+    if board[position_1] == "X" && board[position_2] == "X" && board[position_3]  == "X"
+      return combinations
+    elsif board[position_1] == "O" && board[position_2] == "O" && board[position_3] == "O"
+      return combinations
     end
   end
+end
 
 def full?(board)
-  if !board.detect {|i| i == " " || i == nil}
-    return true
-  else
-    return false
-  end
+  board.all? {|positions|
+    positions == "X" || positions == "O"
+  }
 end
 
 def draw?(board)
-  if !won?(board) && full?(board)
-    return true
-  else
-    return false
-  end
+ !won?(board) && full?(board) ? true:false
 end
 
 def over?(board)
-  if draw?(board) || won?(board)
-    return true
-  else
-    return false
-  end
+  won?(board) || draw?(board) ? true:false
 end
 
 def winner(board)
-   if win_combination = won?(board)
-     board[win_combination.first]
-   else
-     return nil
-   end
- end
+  if win_combination = won?(board)
+    board[win_combination.first]
+  else
+    return nil
+  end
+
+
+end
