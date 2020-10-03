@@ -1,6 +1,7 @@
 # Helper Method
 def position_taken?(board, index)
-  !(board[index].nil? || board[index] == " " || board[index] == "")
+  #!(board[index].nil? || board[index] == " " || board[index] == "")
+  (board[index] == "X" || board[index]== "O")
 end
 
 WIN_COMBINATIONS = [
@@ -35,11 +36,11 @@ def full?(board)
 end
 
 def draw?(board)
- !won?(board) && full?(board) ? true:false
+ !won?(board) && full?(board) 
 end
 
 def over?(board)
-  won?(board) || draw?(board) ? true:false
+  won?(board) || draw?(board)
 end
 
 def winner(board)
