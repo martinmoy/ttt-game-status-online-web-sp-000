@@ -36,11 +36,11 @@ def full?(board)
 end
 
 def draw?(board)
- !won?(board) && full?(board) 
+ !won?(board) && full?(board) #? true:false
 end
 
 def over?(board)
-  won?(board) || draw?(board)
+  won?(board) || draw?(board) #? true:false
 end
 
 def winner(board)
